@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle Pokémon</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 40px;
+        }
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: #ffffffcc;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            text-transform: capitalize;
+            margin-bottom: 15px;
+        }
+        img {
+            display: block;
+            margin: auto;
+            width: 150px;
+        }
+        h2 {
+            margin-top: 25px;
+            border-bottom: 2px solid #ffcb05;
+            padding-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #f8f8f8;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #ffcb05;
+            color: #2a75bb;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        li {
+            padding: 6px;
+            text-transform: capitalize;
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 10px;
+            margin: 3px;
+            color: white;
+        }
+
+        .fire { background-color: #F08030; }
+        .water { background-color: #6890F0; }
+        .grass { background-color: #78C850; }
+        .electric { background-color: #F8D030; color: #000; }
+        .ice { background-color: #98D8D8; color: #000; }
+        .fighting { background-color: #C03028; }
+        .poison { background-color: #A040A0; }
+        .ground { background-color: #E0C068; color: #000; }
+        .flying { background-color: #A890F0; }
+        .psychic { background-color: #F85888; }
+        .bug { background-color: #A8B820; }
+        .rock { background-color: #B8A038; }
+        .ghost { background-color: #705898; }
+        .dragon { background-color: #7038F8; }
+        .dark { background-color: #705848; }
+        .steel { background-color: #B8B8D0; color: #000; }
+        .fairy { background-color: #EE99AC; }
+
+        .ability {
+            display: block;
+            background-color: #4e79a7;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+            text-transform: capitalize;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #2a75bb;
+        }
+        .back:hover {
+            color: #ffcb05;
+        }
+    </style>
+</head>
+<body th:style="|background-color:
+  ${pokemon.types[0].type.name == 'fire' ? '#FEE6D0' :
+    pokemon.types[0].type.name == 'water' ? '#D0E6FF' :
+    pokemon.types[0].type.name == 'grass' ? '#D0FFD0' :
+    pokemon.types[0].type.name == 'electric' ? '#FFF8D0' :
+    pokemon.types[0].type.name == 'ice' ? '#D0FFFF' :
+    pokemon.types[0].type.name == 'fighting' ? '#FFD0D0' :
+    pokemon.types[0].type.name == 'poison' ? '#E0D0FF' :
+    pokemon.types[0].type.name == 'ground' ? '#FFF0C0' :
+    pokemon.types[0].type.name == 'flying' ? '#E0E0FF' :
+    pokemon.types[0].type.name == 'psychic' ? '#FFD0E0' :
+    pokemon.types[0].type.name == 'bug' ? '#E0FFD0' :
+    pokemon.types[0].type.name == 'rock' ? '#E0E0C0' :
+    pokemon.types[0].type.name == 'ghost' ? '#D0D0FF' :
+    pokemon.types[0].type.name == 'dragon' ? '#D0D0FF' :
+    pokemon.types[0].type.name == 'dark' ? '#D0D0D0' :
+    pokemon.types[0].type.name == 'steel' ? '#E0E0E0' :
+    pokemon.types[0].type.name == 'fairy' ? '#FFE0F0' :
+    '#F5F5F5'}|">
+
+<div class="container">
+
+<h1 th:text="${pokemon.name}"></h1>
+
+<img th:src="${pokemon.sprites.front_default}" alt="pokemon">
+
+<h2>Información general</h2>
+<table>
+    <tr><th>ID</th><td th:text="${pokemon.id}"></td></tr>
+    <tr><th>Altura</th><td th:text="${pokemon.height}"></td></tr>
+    <tr><th>Peso</th><td th:text="${pokemon.weight}"></td></tr>
+</table>
+
+<h2>Tipos</h2>
+<ul>
+    <li th:each="t : ${pokemon.types}"
+        th:text="${t.type.name}"
+        th:class="${t.type.name}">
+    </li>
+</ul>
+
+<h2>Habilidades</h2>
+<ul>
+    <li th:each="entry : ${abilitiesMap}" class="ability">
+        <span th:text="${entry.key} + ': ' + ${entry.value}"></span>
+    </li>
+</ul>
+
+<h2>Stats</h2>
+<table>
+    <tr>
+        <th>Stat</th>
+        <th>Valor</th>
+    </tr>
+    <tr th:each="s : ${pokemon.stats}">
+        <td th:text="${s.stat.name}"></td>
+        <td th:text="${s.base_stat}"></td>
+    </tr>
+</table>
+
+<a class="back" href="/">Volver</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado Pokémon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            max-width: 300px;
+            margin: auto;
+            padding: 0;
+            background: white;
+            border-radius: 5px;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            text-transform: capitalize;
+        }
+        a:hover {
+            color: #007bff;
+        }
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Primeros Pokémon</h1>
+
+<ul>
+    <li th:each="p : ${pokemons}">
+        <a th:href="@{/pokemon(search=${p.name})}"
+           th:text="${p.name}"></a>
+    </li>
+</ul>
+
+<a class="back" href="/">Volver</a>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pokédex</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 40px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pokédex</h1>
+
+<form action="/pokemon" method="get">
+    <input type="text" name="search" placeholder="Nombre o ID">
+    <button type="submit">Buscar</button>
+</form>
+
+<p class="error" th:text="${error}"></p>
+
+<a href="/list">Ver primeros Pokémon</a>
+
+</body>
+</html>
